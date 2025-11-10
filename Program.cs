@@ -1,10 +1,24 @@
-﻿namespace optimized_restore
+﻿using optimized_restore.ConsoleWrapper;
+using optimized_restore.Questions;
+using optimized_restore.Settings;
+
+namespace optimized_restore
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            var config = SettingsService.GetConfigSectionAsType<List<RestoreConfiguration>>("appsettings.json", "RestoreConfigurations");
+
+            var context = QuestionService.GetAnswersToQuestions(config);
+
+            var backupLocation = context[QuestionKey.BackupLocation];
+            var configurationToUse = context[QuestionKey.ConfigurationToUse];
+            var executeQueriesAfterRestore = context[QuestionKey.ExecuteQueriesAfterRestore];
+
+            ConsoleService.DisplayContextAsTable(context);
+
+            Console.ReadKey();
         }
     }
 }
