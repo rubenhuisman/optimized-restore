@@ -10,6 +10,7 @@
     public class SettingsObject
     {
         public string SqlServerHost { get; set; }
+        public string SqlPackagePath { get; set; }
         public List<RestoreConfiguration> RestoreConfigurations { get; set; }
     }
 }

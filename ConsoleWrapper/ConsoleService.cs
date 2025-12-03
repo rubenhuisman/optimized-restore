@@ -29,20 +29,5 @@ namespace optimized_restore.ConsoleWrapper
 
             return result;
         }
-
-        internal static void DisplayContextAsTable(Dictionary<QuestionKey, string> context)
-        {
-            var columns = context.Keys.Select(key => new TableColumn(key.ToString()).Centered()).ToList();
-            var rows = context.Values.ToList();
-
-            var table = new Table()
-                .AddColumn(new TableColumn("Setting"))
-                .AddColumn(new TableColumn("Value"));
-
-            foreach (var keyValue in context)
-                table.AddRow(keyValue.Key.ToString(), keyValue.Value);
-
-            AnsiConsole.Write(table);
-        }
     }
 }

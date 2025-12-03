@@ -1,22 +1,17 @@
-﻿using optimized_restore.ConsoleWrapper;
-using optimized_restore.Questions;
+﻿using optimized_restore.Questions;
 using optimized_restore.Settings;
 
 namespace optimized_restore
 {
-    public class Program
+    public partial class Program
     {
         public static void Main()
         {
-            var config = SettingsService.GetConfigSectionAsType<List<RestoreConfiguration>>("appsettings.json", "RestoreConfigurations");
+            var fullConfiguration = SettingsService.GetConfigSectionAsType<SettingsObject>("appsettings.json");
 
-            var context = QuestionService.GetAnswersToQuestions(config);
+            var context = QuestionService.GetAnswersToQuestions(fullConfiguration.RestoreConfigurations);
 
-            var backupLocation = context[QuestionKey.BackupLocation];
-            var configurationToUse = context[QuestionKey.ConfigurationToUse];
-            var executeQueriesAfterRestore = context[QuestionKey.ExecuteQueriesAfterRestore];
-
-            ConsoleService.DisplayContextAsTable(context);
+            DatabaseService.HandleRestore(fullConfiguration, context);
 
             Console.ReadKey();
         }

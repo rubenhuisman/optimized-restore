@@ -5,13 +5,13 @@ namespace optimized_restore.Settings
 {
     public static class SettingsService
     {
-        public static T GetConfigSectionAsType<T>(string configFileName, string key)
+        public static T GetConfigSectionAsType<T>(string configFileName)
         {
             var builder = new ConfigurationBuilder()
                .SetBasePath(GetExecutingDirectory())
                .AddJsonFile(configFileName, optional: false);
 
-            return builder.Build().GetSection(key).Get<T>();
+            return builder.Build().Get<T>();
         }
 
         public static string GetExecutingDirectory()

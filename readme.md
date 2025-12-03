@@ -10,6 +10,12 @@ The SQL Server host where the database is hosted. This should be the server addr
 
 - **Example**: `"SqlServerHost": "localhost"`
 
+### SqlPackagePath
+
+The path where SqlPackage is located.
+
+- **Example**: `"SqlPackagePath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\Extensions\\Microsoft\\SQLDB\\DAC\\SqlPackage.exe"`
+
 ### RestoreConfigurations
 
 A list of configurations specifying the databases to be restored.
@@ -28,6 +34,7 @@ A list of configurations specifying the databases to be restored.
 "RestoreConfigurations": [
   {
     "Name": "MyDatabaseRestore",
+    "SqlPackagePath": "",
     "DatabaseNamePrefix": "prod_",
     "QueriesAfterRestore": [
       "UPDATE users SET active = 1 WHERE last_login > '2025-01-01';",

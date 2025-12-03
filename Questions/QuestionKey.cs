@@ -3,7 +3,8 @@
     public enum QuestionKey
     {
         BackupLocation = 10,
-        ConfigurationToUse = 20,
-        ExecuteQueriesAfterRestore = 30
+        DatabaseName = 20,
+        ConfigurationToUse = 30,
+        ExecuteQueriesAfterRestore = 40
     }
 }

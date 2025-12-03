@@ -25,6 +25,18 @@ namespace optimized_restore.Questions
                 },
                 new Question
                 {
+                    Key = QuestionKey.DatabaseName,
+                    Title = (context) => {
+                        var config = settings.FirstOrDefault(x => x.Name == context[QuestionKey.ConfigurationToUse]);
+
+                        var prefix = string.IsNullOrEmpty(config.DatabaseNamePrefix) ? string.Empty :$" (configured prefix: {config.DatabaseNamePrefix})";
+
+                        return $"Enter new database name{prefix}:";
+                    },
+                    OptionsGetter = (_) => []
+                },
+                new Question
+                {
                     Key = QuestionKey.ExecuteQueriesAfterRestore,
                     Title = (_) => "Execute [green]queries[/] after restore?",
                     OptionsGetter = (_) => ["Yes", "No"]
