@@ -87,24 +87,10 @@ namespace optimized_restore
 
         public static void DropDatabase(string server, string database)
         {
-            var connectionString = GetConnectionString(server);
             var query = $"DROP DATABASE IF EXISTS [{database}]";
 
-            try
-            {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-
-                AnsiConsole.MarkupLine($"[green]Database '{database}' successfully dropped.[/]");
-            }
-            catch (Exception ex)
-            {
-                AnsiConsole.MarkupLine($"[red]Error dropping database: {ex.Message}[/]");
-                AnsiConsole.WriteException(ex);
-                throw;
-            }
+            ExecuteSqlQuery(server, database, query);
+            AnsiConsole.MarkupLine($"[green]Database '{database}' successfully dropped.[/]");
         }
 
         public static bool ExecuteSqlQuery(string server, string database, string query)
